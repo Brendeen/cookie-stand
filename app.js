@@ -36,8 +36,6 @@ header();
 ShopOne.prototype.render = function() {
 
   console.dir('stores', tableSelector);
-  // let tableBody = document.createElement('tbody');
-  // tableSelector.appendChild(tableBody);
   let trElem = document.createElement('tr');
   tableSelector.appendChild(trElem);
 
@@ -45,10 +43,6 @@ ShopOne.prototype.render = function() {
   tdElem.textContent = this.name;
   trElem.appendChild(tdElem);
 
-  // tdElem = document.createElement('td');
-  // tdElem.textContent = Seattle.cookiesBought[0];
-  // console.log(Seattle.cookiesBought);
-  // trElem.appendChild(tdElem);
   for (let i = 0; i < hours.length; i++) {
     let tableData = document.createElement('td');
     tableData.textContent = this.cookiesBought[i];
@@ -61,6 +55,17 @@ ShopOne.prototype.render = function() {
   totalTableData.textContent = this.total;
   trElem.appendChild(totalTableData);
 };
+
+let grandTotals = document.createElement('tr');
+tableSelector.appendChild(grandTotals);
+
+// grandTotals = document.createElement('th');
+// for(let o = 0; 0 < storesArr; o++){
+//   grandTotals.textContent = this.storesArr;
+//   tableSelector.appendChild(grandTotals);
+// }
+
+
 // for(let u = 0; u < location.length; u++)
 
 
@@ -151,6 +156,8 @@ let Tokyo = new ShopOne('Tokyo', 3, 24, 1.2, [], 0);
 let Dubai = new ShopOne('Dubai', 11, 38, 3.7, [], 0);
 let Paris = new ShopOne('Paris', 20, 38, 2.3, [], 0);
 let Lima = new ShopOne('Lima', 2, 16, 4.6, [], 0);
+
+let storesArr = [Seattle, Tokyo, Dubai, Paris, Lima];
 
 
 // **************** Methods ****************************
