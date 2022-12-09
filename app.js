@@ -14,7 +14,7 @@ let hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '
 let tableSelector = document.getElementById('stores');
 
 // *********************** Rendering ***************************
-function header(){
+function header() {
 
   let trElem = document.createElement('tr');
   tableSelector.appendChild(trElem);
@@ -33,9 +33,8 @@ function header(){
   trElem.appendChild(thElem);
 }
 header();
-ShopOne.prototype.render = function() {
+ShopOne.prototype.render = function () {
 
-  console.dir('stores', tableSelector);
   let trElem = document.createElement('tr');
   tableSelector.appendChild(trElem);
 
@@ -46,7 +45,6 @@ ShopOne.prototype.render = function() {
   for (let i = 0; i < hours.length; i++) {
     let tableData = document.createElement('td');
     tableData.textContent = this.cookiesBought[i];
-    console.log(this.cookiesBought[i]);
 
     trElem.appendChild(tableData);
 
@@ -56,8 +54,22 @@ ShopOne.prototype.render = function() {
   trElem.appendChild(totalTableData);
 };
 
-let grandTotals = document.createElement('tr');
-tableSelector.appendChild(grandTotals);
+function grandTotals() {
+  let grandTotals = document.createElement('tr');
+  tableSelector.appendChild(grandTotals);
+
+}
+
+// *************** New Table event ************************
+
+let myForm = document.getElementById('form');
+
+
+
+
+
+
+// ******************* old code, unused **********************
 
 // grandTotals = document.createElement('th');
 // for(let o = 0; 0 < storesArr; o++){
@@ -188,6 +200,7 @@ ShopOne.prototype.cookieSales = function () {
 };
 
 
+
 // **************** Object Calling*******************
 
 // cookieSales(hours, shopOne);
@@ -216,9 +229,29 @@ Dubai.render();
 Paris.render();
 Lima.render();
 
-
 console.log(Seattle);
 console.log(Tokyo);
 console.log(Dubai);
 console.log(Paris);
 console.log(Lima);
+
+
+function handleSubmit(event) {
+  event.preventDefault();
+  console.log('form submitted');
+
+  let storeName = event.target.storeName.value;
+  let minCustomers = +event.target.minCustomers.value;
+  let maxCustomers = +event.target.maxCustomers.value;
+  let averageSale = +event.target.averageSale.value;
+
+  let NewStore = new ShopOne(storeName, minCustomers, maxCustomers, averageSale);
+
+  NewStore.cookieSales();
+  NewStore.render();
+  console.log(NewStore);
+}
+
+
+myForm.addEventListener('submit', handleSubmit);
+
