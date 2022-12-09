@@ -126,3 +126,30 @@ footer {
 * p{
   font-family: 'Times New Roman', Times, serif
 }
+
+
+#form fieldset {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: fit-content;
+  width: fit-content;
+  margin-left: 150px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  background-color: rgb(0, 182, 182);
+}
+
+#form button {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+
+#form button:hover {
+  color: white;
+  background-color: black;
+  transition: 1s;
+}
