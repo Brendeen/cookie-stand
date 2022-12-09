@@ -54,10 +54,27 @@ ShopOne.prototype.render = function () {
   trElem.appendChild(totalTableData);
 };
 
-function grandTotals() {
-  let grandTotals = document.createElement('tr');
-  tableSelector.appendChild(grandTotals);
+function footer() {
+  let grandTotals = document.getElementById('stores');
+  let tr = document.createElement('tr');
+  let td = document.createElement('td');
+  td.textContent = 'Grand Totals';
+  tr.appendChild(td);
+  let grandTotal = 0;
+  for(let p = 0; p < hours.length; p++) {
+    let totalHours = 0;
+    for(let j = 0; j < storesArr.length; j++) {
+      totalHours = totalHours + storesArr[j].cookieSales[p];
+      grandTotal = grandTotal + storesArr[j].cookieSales[p];
+    }
+    let td = document.createElement('td');
+    td.textContent = totalHours;
+    tr.appendChild(td);
 
+  }
+  let grandTotalCell = document.createElement('td');
+  grandTotalCell.textContent = grandTotals;
+  tr.appendChild(grandTotalCell);
 }
 
 // *************** New Table event ************************
@@ -222,12 +239,16 @@ Tokyo.cookieSales();
 Dubai.cookieSales();
 Paris.cookieSales();
 Lima.cookieSales();
+footer();
+
+document.getElementById('stores').deleteRow(-1);
 
 Seattle.render();
 Tokyo.render();
 Dubai.render();
 Paris.render();
 Lima.render();
+footer.render();
 
 console.log(Seattle);
 console.log(Tokyo);
