@@ -17,7 +17,6 @@ let tableSelector = document.getElementById('stores');
 function header() {
 
   let trElem = document.createElement('tr');
-  tableSelector.appendChild(trElem);
 
   let thElem = document.createElement('th');
   thElem.textContent = 'Stores';
@@ -31,12 +30,13 @@ function header() {
   thElem = document.createElement('th');
   thElem.textContent = 'total';
   trElem.appendChild(thElem);
+  tableSelector.appendChild(trElem);
 }
 header();
+
 ShopOne.prototype.render = function () {
 
   let trElem = document.createElement('tr');
-  tableSelector.appendChild(trElem);
 
   let tdElem = document.createElement('td');
   tdElem.textContent = this.name;
@@ -52,10 +52,10 @@ ShopOne.prototype.render = function () {
   let totalTableData = document.createElement('td');
   totalTableData.textContent = this.total;
   trElem.appendChild(totalTableData);
+  tableSelector.appendChild(trElem);
 };
 
 function footer() {
-  let grandTotals = document.getElementById('stores');
   let tr = document.createElement('tr');
   let td = document.createElement('td');
   td.textContent = 'Grand Totals';
@@ -64,8 +64,8 @@ function footer() {
   for(let p = 0; p < hours.length; p++) {
     let totalHours = 0;
     for(let j = 0; j < storesArr.length; j++) {
-      totalHours = totalHours + storesArr[j].cookieSales[p];
-      grandTotal = grandTotal + storesArr[j].cookieSales[p];
+      totalHours = totalHours + storesArr[j].cookiesBought[p];
+      grandTotal = grandTotal + storesArr[j].cookiesBought[p];
     }
     let td = document.createElement('td');
     td.textContent = totalHours;
@@ -73,8 +73,8 @@ function footer() {
 
   }
   let grandTotalCell = document.createElement('td');
-  grandTotalCell.textContent = grandTotals;
-  tr.appendChild(grandTotalCell);
+  grandTotalCell.textContent = grandTotal;
+  tableSelector.appendChild(tr);
 }
 
 // *************** New Table event ************************
@@ -239,16 +239,16 @@ Tokyo.cookieSales();
 Dubai.cookieSales();
 Paris.cookieSales();
 Lima.cookieSales();
-footer();
 
-document.getElementById('stores').deleteRow(-1);
+
+
 
 Seattle.render();
 Tokyo.render();
 Dubai.render();
 Paris.render();
 Lima.render();
-footer.render();
+footer();
 
 console.log(Seattle);
 console.log(Tokyo);
@@ -268,9 +268,13 @@ function handleSubmit(event) {
 
   let NewStore = new ShopOne(storeName, minCustomers, maxCustomers, averageSale);
 
+  let lastChild = document.getElementById('stores').lastChild;
+  tableSelector.removeChild(lastChild);
+
   NewStore.cookieSales();
   NewStore.render();
   console.log(NewStore);
+  footer();
 }
 
 
